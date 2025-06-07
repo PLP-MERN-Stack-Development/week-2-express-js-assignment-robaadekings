@@ -1,63 +1,142 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19721799&assignment_repo_type=AssignmentRepo)
-# Express.js RESTful API Assignment
+Product API
+This is a RESTful API built with Node.js, Express, and MongoDB (Mongoose) for managing product data in an inventory system. It supports full CRUD operations, search, filtering, pagination, authentication via API key, and error handling.
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+ Features
+Create, Read, Update, and Delete products
 
-## Assignment Overview
+Filter products by category
 
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
+Search products by name (case-insensitive)
 
-## Getting Started
+Pagination support for listing
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
+Get statistics (e.g., count by category)
 
-## Files Included
+Custom middleware for:
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+Request logging
 
-## Requirements
+API key authentication
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+Product data validation
 
-## API Endpoints
+Global error handling
 
-The API will have the following endpoints:
+ Project Structure
+bash
+Copy
+Edit
+product-api/
+│
+├── server.js                  # App entry point
+├── models/
+│   └── product.js             # Mongoose schema
+├── routes/
+│   └── productRoutes.js       # All product-related endpoints
+├── middleware/
+│   ├── logger.js              # Logs requests with timestamps
+│   ├── auth.js                # Validates API key
+│   └── validateProduct.js     # Validates input using express-validator
+├── errors/
+│   └── CustomErrors.js        # NotFoundError, ValidationError
+├── package.json
+└── README.md
+📦 API Endpoints
+Base URL: http://localhost:3000/api
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
 
-## Submission
+ Create Product
+bash
+Copy
+Edit
+POST /product
+Body:
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+json
+Copy
+Edit
+{
+  "id": 1,
+  "name": "Smartphone",
+  "description": "Latest model",
+  "price": 20000,
+  "category": "electronics",
+  "instock": 20
+}
+Get Product by ID
+bash
+Copy
+Edit
+GET /product/:id
+Get Products (with filters, search & pagination)
+pgsql
+Copy
+Edit
+GET /products?category=electronics&name=phone&page=1&limit=5
+Update Product by ID
+bash
+Copy
+Edit
+PUT /product/:id
+Body: (Must include full product object)
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+json
+Copy
+Edit
+{
+  "id": 1,
+  "name": "Updated Phone",
+  "description": "Newer version",
+  "price": 22000,
+  "category": "electronics",
+  "instock": 15
+}
+ Delete Product
+bash
+Copy
+Edit
+DELETE /product/:id
+Product Statistics
+bash
+Copy
+Edit
+GET /products/stats
+Returns:
 
-## Resources
+json
+Copy
+Edit
+[
+  { "_id": "electronics", "count": 5 },
+  { "_id": "furniture", "count": 2 }
+]
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+cd product-api
+Install dependencies:
+
+bash
+Copy
+Edit
+npm install
+Start MongoDB (make sure it's running on mongodb://localhost:27017)
+
+Run the server:
+
+bash
+Copy
+Edit
+node server.js
+Test with Postman using:
+
+Base URL: http://localhost:3000/product
+
+
+
+ Requirements
+Node.js
+
+MongoDB
+
+Author
+Your Name – murangiri robert murungi
+
