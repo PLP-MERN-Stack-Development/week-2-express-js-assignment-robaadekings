@@ -84,7 +84,7 @@ router.put('/product/:id', async (req, res)=> {
     }
 });
 
-// Delete a task
+// Delete a product
 router.delete('/product/:id', async (req, res) =>{
 try{
 
